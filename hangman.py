@@ -1,5 +1,8 @@
 # Simple Hangman Project
 # Darian Jennings - 08/23/2020
+# Hangman: interactive word guessing game, word is randomly chosen each iteration. 
+# Limit is 6 incorrect guesses, repeats will not count against you.
+
 import random
 
 
