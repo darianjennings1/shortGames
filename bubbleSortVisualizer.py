@@ -7,7 +7,7 @@ def swap(A, i, j):
     A[i],A[j]=A[j],A[i]
 
 
-def bubble_sort(arr):
+def bubble(arr):
     if len(arr) == 1:
         return
     for i in range(len(arr) - 1):
@@ -23,7 +23,7 @@ array = [i + 1 for i in range(n)]
 random.shuffle(array)
 
 title = "Bubble Sort Visualizer"
-alg = sort_bubble(array)
+alg = bubble(array)
 
 # Initialize fig
 fig, ax = plt.subplots()
