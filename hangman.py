@@ -1,8 +1,5 @@
 # Simple Hangman Project
-# Darian Jennings - 08/23/2020
-# Hangman: interactive word guessing game, word is randomly chosen each iteration. 
-# Limit is 6 incorrect guesses, repeats will not count against you.
-
+# Darian Jennings - 09/03/2020
 import random
 
 
@@ -14,7 +11,8 @@ def get_word():
              'mathematics', 'signals', 'discrete', 'structure', 'programming', 'python'
              'matlab', 'java', 'ruby', 'assembly', 'engineering', 'organization', 'university',
              'religion', 'hangman', 'sudoku', 'football', 'soccer', 'basketball', 'bison', 'wolf',
-             'mammal', 'speed', 'velocity', 'tension', 'friction', 'force', 'studio', 'apartment']
+             'mammal', 'speed', 'velocity', 'tension', 'friction', 'force', 'studio', 'apartment'
+             'leon', 'valley', 'bandera', 'mystic']
     word = random.choice(words)
     return word.upper()
 
@@ -25,11 +23,12 @@ def play(word):
     guessed_letters = []
     guessed_words = []
     tries = 6
-    print("Let's play Hangman!")
+    print("\nLet's play Hangman!")
     print(display(tries))
     print(word_progress)
     while not guessed and tries > 0:
-        print("You have ", tries, " possible attempts")
+        print("You have", tries, "attempt(s) left")
+        print("There are ", len(word), " total letters in the word")
         guess = input("Please guess a letter or word: ").upper()
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
@@ -52,62 +51,64 @@ def play(word):
             if guess in guessed_words:
                 print("\nYou already guessed the word", guess, " try again")
             elif guess != word:
-                print("\n ", guess, " is not the word....")
+                print("\n", guess, " is not the word....")
                 tries -= 1
                 guessed_words.append(guess)
             else:
                 guessed = True
                 word_progress = word
         else:
-            print("\n", guess, " is not a valid guess. Try again.")
+            print("\nYour guess was either too short/long or was numerical. Try again.")
         print(display(tries))
         print(word_progress)
-        print("\n")
+        print("Guessed letters: ", guessed_letters)
     if guessed:
-        print("You guessed the word correctly, you win!")
+        print("****************************************")
+	print("You guessed the word correctly, you win!")
+	print("****************************************")
     else:
-        print("You ran out of tries.. The word was " + word)
+        print("\nYou ran out of tries.. The word was " + word)
 
 
 def display(tries):
     stages = ["""
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
-                |     \\|/    |
+                |     \\|/     |
                 |      |      |
                 |     / \\     |
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
-                |     \\|/    |
+                |     \\|/     |
                 |      |      |
                 |     /       |
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
-                |     \\|/    |
+                |     \\|/     |
                 |      |      |
                 |             |
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
-                |     \\|     |
+                |     \\|      |
                 |      |      |
                 |             |
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
                 |      |      |
@@ -116,7 +117,7 @@ def display(tries):
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |      O      |
                 |             |
@@ -125,7 +126,7 @@ def display(tries):
                 ---------------
                 """,
               """
-                --------------
+                ---------------
                 |      |      |
                 |             |
                 |             |
