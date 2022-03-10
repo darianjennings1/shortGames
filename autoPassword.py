@@ -1,28 +1,103 @@
-# Automated password retrieval script
-# This is a sample script, my personal script contains 100+ passwords; allows me to retrieve easily without
-# reading through every single line of organization and password combination
-# Dictionary {organization == key, password == value}
-# Darian Jennings , 08/25/2020
-
-
-def getPassword():
-    passDict = {
-        'organization': "password1234"
-        'github': "githubPassword"
-    }
-    return passDict
+# Automated password retrieval script - passkeys stored in json file
+# Darian Jennings , created 2/23/2021, updated 8/24/21
+# need to add encryption from other file and eventually create a GUI (maybe)
+import json
 
 
 def main():
-    data = getPassword()
-    passwords = dict((i.upper(), j) for i, j in data.items())
-    key = input("What organization do you need the password for?:\n").upper()
-    if key in passwords:
-        print("Password is: ", passwords[key])
-    else:
-        print("The organization key you entered is either misspelled or does not exist")
-    if input("Would you like to re-enter Y/N?  ").strip().upper() == "Y":
-        main()
+    data = getData()
+    if not data:
+        print("There is currently no data in the storage file...")
+        data = {}
+    # variables for while/for loops
+    repeat = 'Y'
+    r1 = 'Y'
+
+    while repeat == 'Y' and data:
+        passwords = dict((i.upper(), j) for i, j in data.items())
+        choice = getMenu()
+        if not data:
+            print("\nThere is currently no data...select option 3 to add data.")
+
+        elif choice == 1:
+            while r1 == 'Y':
+                org = input("What organization do you need the password for?\n").strip().upper()
+                if org in passwords:
+                    print("Password is: ", passwords[org])
+                else:
+                    print("The organization key you entered is either misspelled or does not exist")
+                r1 = input("Would you like to retrieve another password Y/N? ").strip().upper()
+
+        elif choice == 2:
+            while r1 == 'Y':
+                org = input("What organization do you need to update the password for?\n").strip().upper()
+                if org in passwords:
+                    passwords[org] = input("What would you like the new password to be?\n").strip()
+                    print(org + " password successfully updated")
+                else:
+                    print("The organization key you entered is either misspelled or does not exist")
+                dumpPass(passwords)
+                r1 = input("Would you like to update another organization password Y/N?  ").strip().upper()
+
+        elif choice == 3:
+            while r1 == 'Y':
+                org = input("What is the organization name?\n").strip().upper()
+                if org in passwords:
+                    print(org + " already exists...")
+                else:
+                    passwords[org] = input("What is the password for this organization?\n").strip()
+                    print("The organization and password have been successfully saved")
+                dumpPass(passwords)
+                r1 = input("Would you like to add another organization & password combination Y/N? ").strip().upper()
+
+        elif choice == 4:
+            break
+        else:
+            print("You entered an invalid menu option...")
+
+        # outer for loop to go back to main menu or exit program
+        repeat = input("Would you like to go back to the main menu? Y/N ").strip().upper()
+        # refresh to pull new data if added/changed from options 2/3
+        if repeat == 'Y':
+            data = getData()
+    print("\n")
+
+
+def getMenu():
+    print("\nPASSWORD MAIN MENU\n------------------")
+    switch = {
+        1: "Retrieve password",
+        2: "Update password",
+        3: "Add new organization and password",
+        4: "Exit"
+    }
+    for x, y in switch.items():
+        print(x, y)
+    valid = False
+    ans = 0
+    while not valid:
+        ans = input("What would you like to do?\n")
+        try:
+            int(ans)
+            valid = True
+            ans = int(ans)
+        except ValueError:
+            print('Invalid input!')
+
+    return ans
+
+
+def getData():
+    file = open('pass.json', )
+    data_values = json.load(file)
+    file.close()
+    return data_values
+
+
+def dumpPass(passwords):
+    with open('pass.json', 'w') as fp:
+        json.dump(passwords, fp, indent=4)
+        fp.close()
 
 
 if __name__ == "__main__":
