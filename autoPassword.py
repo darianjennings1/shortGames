@@ -1,6 +1,6 @@
 # Automated password retrieval script - passkeys stored in json file
-# Darian Jennings , created 2/23/2021, updated 8/24/21
-# need to add encryption from other file and eventually create a GUI (maybe)
+# Darian Jennings 
+# refer to "passwords.json" file to store passwords and data
 import json
 
 
