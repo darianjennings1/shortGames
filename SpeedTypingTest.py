@@ -1,4 +1,4 @@
-=# Speed-Typing Test
+# Speed-Typing Test
 # Darian Jennings, created 8/23/20, updated 5/6/21
 import time
 
