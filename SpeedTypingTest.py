@@ -1,57 +1,58 @@
-# Simple Speed-Typing Test Project
-# Darian Jennings - 08/23/2020
+=# Speed-Typing Test
+# Darian Jennings, created 8/23/20, updated 5/6/21
 import time
 
 
 def play(level):
     sentences = {
+        1: "This level is very easy",
         1: "Hello this is a speed typing test written in python programming language",
-        2: "The creator of this simplistic game is unknown, I tried to google the answer and had no luck",
-        3: "You have chosen the most difficult level possible for this simple python program"
+        2: "You have chosen the most difficult level possible for this simple python program",
+        3: "The creator of this simplistic game is unknown, I tried to google the answer and had no luck"
     }
     # retrieves a phrase based on user inputted level
     phrase = sentences.get(level)
     pc = letterCount(phrase)
-    print("This phrase has ", pc, "letters.")
-    # returns the # of letters in the phrase pc == phraseCount
-    pc = letterCount(phrase)
-
+    # returns the # of letters in the phrase,, pc == phraseCount
     t0 = time.time()
-    print("Enter the following phrase:\n " + phrase + "\n")
+    print("Enter the following phrase:\n" + phrase)
     userInput = input()
     # ic == input count
     ic = letterCount(userInput)
-
     t1 = time.time()
-
+    # estimated reading time based on phrase
     readingTime = calculateReadingTime(phrase)
+    # total time elapsed
     totalTime = round((t1 - t0) - readingTime, 2)
-    acc = calculateAccuracy(phrase, userInput, pc)
+    # returns accuracy and number of mismatched key inputs
+    acc, mism = calculateAccuracy(phrase, userInput, ic, pc)
 
     rate = 60 / totalTime
     wpm = round(len(phrase.split()) * rate, 2)
 
-    print("The phrase had ", pc, " letters you entered ", ic, " letters.")
-    print("Your accuracy from this test was ", acc, "%.")
-    print("Total time elapsed: ", totalTime, " seconds")
-    print("The program calculated your expected words per minute -> ", wpm)
+    print("The phrase had ", pc, " letters you entered ", str(ic-mism), " of the letters correctly.")
+    print("Accuracy: ", acc, "%.")
+    print("Total elapsed time: ", totalTime, " seconds")
+    print("Expected words per minute -> ", wpm)
 
 
-def calculateAccuracy(phrase, userInput, pc):
+def calculateAccuracy(phrase, userInput, ic, pc):
     # will count the number of correct input letters in userInput
     mismatch = []
+    if ic > pc:
+        print("You entered " + str(ic-pc) + " letter(s) over the required amount.")
+    elif ic < pc:
+        print("You entered " + str(ic-pc) + " letter(s) under the required amount.")
     i = 0
     for letter in phrase:
-        if i not in range(len(userInput)):
-            mismatch.append("*")
-            print("You did not enter enough letters....")
-            break
-        elif letter.isalpha() and userInput[i].isalpha() and letter != userInput[i]:
+        if letter != userInput[i]:
             mismatch.append("*")
         i += 1
-    print("\nYou entered ", len(mismatch), " letter(s) incorrectly.")
+    if mismatch:
+        print("\nYou entered ", len(mismatch), " letter(s) incorrectly.")
     accuracy = round(((pc - len(mismatch)) / pc) * 100, 2)
-    return accuracy
+
+    return accuracy,len(mismatch)
 
 
 def calculateReadingTime(phrase):
@@ -66,20 +67,18 @@ def calculateReadingTime(phrase):
 
 def letterCount(phrase):
     count = 0
+    # for letter in phrase: if letter.isalpha: count += 1
     for letter in phrase:
         if letter.isalpha:
             count += 1
     return count
 
 
-def wordCount(phrase):
-    return len(phrase.split())
-
-
 def main():
-    print("Welcome to the Speed-Typing Test!")
+    print("\n\nWelcome to the Speed-Typing Test!")
     level = int(input("What level would you like: \n1 == Beginner\n2 == Medium\n3 == Advanced\n"))
     play(level)
+
     while input("Would you like to play again Y/N?  ").strip().upper() == "Y":
         level = int(input("\nWhat level would you like: \n1 == Beginner\n2 == Medium\n3 == Advanced\n"))
         play(level)
