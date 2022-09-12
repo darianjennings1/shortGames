@@ -1,6 +1,7 @@
 # Automated password retrieval script - passkeys stored in json file
 # Darian Jennings 
 # refer to "passwords.json" file to store passwords and data
+
 import json
 
 
@@ -60,6 +61,7 @@ def main():
         # refresh to pull new data if added/changed from options 2/3
         if repeat == 'Y':
             data = getData()
+            r1 = 'Y'
     print("\n")
 
 
