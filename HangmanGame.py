@@ -1,4 +1,4 @@
-# Simple Hangman Project
+# Simple Hangman Game
 # Darian Jennings - 09/03/2020
 import random
 
