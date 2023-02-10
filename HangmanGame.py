@@ -2,20 +2,12 @@
 # Darian Jennings - 09/03/2020
 import random
 
-
-def get_word():
-    words = ['panda', 'giraffe', 'rhino', 'alligator', 'lion', 'tiger',
-             'donkey', 'horse', 'dog', 'raccoon', 'squirrel', 'jazz',
-             'classic', 'rock', 'september', 'july', 'august', 'terrestrial'
-             'aliens', 'blanket', 'lotion', 'decipher', 'algorithms', 'data',
-             'mathematics', 'signals', 'discrete', 'structure', 'programming', 'python'
-             'matlab', 'java', 'ruby', 'assembly', 'engineering', 'organization', 'university',
-             'religion', 'hangman', 'sudoku', 'football', 'soccer', 'basketball', 'bison', 'wolf',
-             'mammal', 'speed', 'velocity', 'tension', 'friction', 'force', 'studio', 'apartment'
-             'leon', 'valley', 'bandera', 'mystic']
-    word = random.choice(words)
-    return word.upper()
-
+word = get_word()
+play(word)
+while input("Would you like to play again Y/N?  ").strip().upper() == "Y":
+    word = get_word()
+    play(word)
+	
 
 def play(word):
     word_progress = "_" * len(word)
@@ -139,13 +131,15 @@ def display(tries):
     return stages[tries]
 
 
-def main():
-    word = get_word()
-    play(word)
-    while input("Would you like to play again Y/N?  ").strip().upper() == "Y":
-        word = get_word()
-        play(word)
-
-
-if __name__ == "__main__":
-    main()
+def get_word():
+    words = ['panda', 'giraffe', 'rhino', 'alligator', 'lion', 'tiger',
+             'donkey', 'horse', 'dog', 'raccoon', 'squirrel', 'jazz',
+             'classic', 'rock', 'september', 'july', 'august', 'terrestrial'
+             'aliens', 'blanket', 'lotion', 'decipher', 'algorithms', 'data',
+             'mathematics', 'signals', 'discrete', 'structure', 'programming', 'python'
+             'matlab', 'java', 'ruby', 'assembly', 'engineering', 'organization', 'university',
+             'religion', 'hangman', 'sudoku', 'football', 'soccer', 'basketball', 'bison', 'wolf',
+             'mammal', 'speed', 'velocity', 'tension', 'friction', 'force', 'studio', 'apartment'
+             'leon', 'valley', 'bandera', 'mystic']
+    word = random.choice(words)
+    return word.upper()
