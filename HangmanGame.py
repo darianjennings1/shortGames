@@ -132,7 +132,7 @@ def display(tries):
 
 
 def get_word():
-    words = ['panda', 'giraffe', 'rhino', 'alligator', 'lion', 'tiger',
+    word_pool = ['panda', 'giraffe', 'rhino', 'alligator', 'lion', 'tiger',
              'donkey', 'horse', 'dog', 'raccoon', 'squirrel', 'jazz',
              'classic', 'rock', 'september', 'july', 'august', 'terrestrial'
              'aliens', 'blanket', 'lotion', 'decipher', 'algorithms', 'data',
@@ -141,5 +141,5 @@ def get_word():
              'religion', 'hangman', 'sudoku', 'football', 'soccer', 'basketball', 'bison', 'wolf',
              'mammal', 'speed', 'velocity', 'tension', 'friction', 'force', 'studio', 'apartment'
              'leon', 'valley', 'bandera', 'mystic']
-    word = random.choice(words)
+    word = random.choice(word_pool)
     return word.upper()
