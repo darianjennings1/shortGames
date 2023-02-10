@@ -2,3 +2,8 @@ This is a local password manager that stores your encrypted passwords in a json 
 and search for particular passwords based on the account, i.e. G-Mail, Twitter, Yahoo, Work, School, etc.
 
 This utilizes the python cryptography library to encrypt and decrypt passwords.
+
+# Install Dependencies
+
+cryptography - https://realpython.com/beautiful-soup-web-scraper-python/
+### `pip install cryptography `
